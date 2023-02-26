@@ -1,6 +1,6 @@
 {
   "name": "catapult",
-  "icon": "https://raw.githubusercontent.com/stevenlovegrove/catapult/main/catapult.png",
+  "icon": "catapult.png",
   "repository": "https://github.com/stevenlovegrove/catapult",
   "publisher": "stevenlovegrove",
   "displayName": "catapult",
