@@ -16,21 +16,51 @@
     "configuration": {
       "title": "Launcharoo",
       "properties": {
+        "launcharoo.editArgumentsBeforeLaunch": {
+          "order": 0,
+          "default": true,
+          "type": "boolean",
+          "scope": "application",
+          "description": "After selecting an existing argument list, prompt for edits before launching."
+        },
+        "launcharoo.maxHistoryPerTarget": {
+          "order": 1,
+          "default": 100,
+          "type": "integer",
+          "scope": "application",
+          "description": "Maximum unique commandline argument lists to keep per target."
+        },
         "launcharoo.history": {
           "default": {},
           "scope": "application",
-          "description": "Command history"
+          "description": "Command history - this is a list of previous commandlines in display order for each used target. Feel free to tidy and customize this list. Changes will be applied immediately."
         }
       }
     },
     "commands": [
       {
+        "command": "launcharoo.pickAndLaunch",
+        "title": "Launcharoo: Pick Target & Launch"
+      },
+      {
         "command": "launcharoo.launch",
-        "title": "Launcharoo"
+        "title": "Launcharoo: Launch"
       },
       {
         "command": "launcharoo.debug",
-        "title": "Debugaroo"
+        "title": "Launcharoo: Debug"
+      },
+      {
+        "command": "launcharoo.again",
+        "title": "Launcharoo: Same again!"
+      },
+      {
+        "command": "launcharoo.clear",
+        "title": "Launcharoo: Clear targets history"
+      },
+      {
+        "command": "launcharoo.settings",
+        "title": "Launcharoo: Settings"
       }
     ]
   },
