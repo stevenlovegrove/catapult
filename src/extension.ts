@@ -132,7 +132,8 @@ function targetLaunched(target : unknown) {
 
 		vscode.window.showQuickPick(items, {
 			title: "Select command line arguments to customize",
-			placeHolder: "Arguments for '" + currentTarget + "'"
+			placeHolder: "Arguments for '" + currentTarget + "'",
+			ignoreFocusOut: true
 		} ).then(targetArgsSelected);
 	}
 }
