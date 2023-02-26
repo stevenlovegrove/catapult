@@ -36,12 +36,13 @@ function targetArgsCustomized(commandline : string | undefined) {
 
 	if(commandline !== "") {
 		hist.unshift(commandline);
-		hist = hist.filter((item,index) => { return hist?.indexOf(item) === index; });
-		hist = hist.slice(0, Math.min(hist.length, maxHistoryPerTarget()) );
-		history[currentTarget] = hist;
 	}
 
-	vscode.window.showInformationMessage("Launching: '" + currentTarget + " " + currentArgs + "'");
+	hist = hist.filter((item,index) => { return hist?.indexOf(item) === index; });
+	hist = hist.slice(0, Math.min(hist.length, maxHistoryPerTarget()) );
+	history[currentTarget] = hist;
+
+	// vscode.window.showInformationMessage("Launching: '" + currentTarget + " " + currentArgs + "'");
 	let thisLaunch = {
 		MIMode: "lldb",
 		args: currentArgs.split(' ')
@@ -92,22 +93,26 @@ function targetLaunched(target : unknown) {
 
 	// arg history for selected target
 	let targetHistory = history[target];
+	console.log("history: " + JSON.stringify(history));
+	console.log("targetHistory1: " + JSON.stringify(targetHistory));
 
 	// arg history for other targets
 	let otherHistory : string[] = [];
 	Object.keys(history).forEach(key => {
 		let otherTargetHistory = history[key];
 		otherTargetHistory.forEach((arglist:string) => {
-			if( (!targetHistory || targetHistory.indexOf(arglist) < 0) && otherHistory.indexOf(arglist) < 0) {
+			if( (!targetHistory || (targetHistory.indexOf(arglist) < 0)) && otherHistory.indexOf(arglist) < 0) {
 				otherHistory.push(arglist);
 			}
 		});
 	});
+	console.log("targetHistory2: " + JSON.stringify(targetHistory));
 
-	if( (!targetHistory || targetHistory.length === 0) && (!otherHistory || otherHistory.length === 0) ) {
+	if( (!targetHistory || (targetHistory.length === 0)) && (otherHistory.length === 0)) {
 		targetArgsSelected({label:empty});
 	}else{
 		let items : vscode.QuickPickItem[] = [];
+
 		items.push({kind: vscode.QuickPickItemKind.Separator, label:"Start from scratch"});
 		items.push({label: empty});
 
