@@ -1,8 +1,10 @@
 {
-  "name": "launcharoo",
+  "name": "catapult",
+  "icon": "https://raw.githubusercontent.com/stevenlovegrove/catapult/main/catapult.png",
+  "repository": "https://github.com/stevenlovegrove/catapult",
   "publisher": "stevenlovegrove",
-  "displayName": "launcharoo",
-  "description": "Launcharoo helps you to manage launch configurations, particularly targetting cmake applications.",
+  "displayName": "catapult",
+  "description": "catapult helps you to manage launch configurations, particularly targetting cmake applications.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.75.0"
@@ -14,23 +16,23 @@
   "main": "./dist/extension.js",
   "contributes": {
     "configuration": {
-      "title": "Launcharoo",
+      "title": "catapult",
       "properties": {
-        "launcharoo.editArgumentsBeforeLaunch": {
+        "catapult.editArgumentsBeforeLaunch": {
           "order": 0,
           "default": true,
           "type": "boolean",
           "scope": "application",
           "description": "After selecting an existing argument list, prompt for edits before launching."
         },
-        "launcharoo.maxHistoryPerTarget": {
+        "catapult.maxHistoryPerTarget": {
           "order": 1,
           "default": 100,
           "type": "integer",
           "scope": "application",
           "description": "Maximum unique commandline argument lists to keep per target."
         },
-        "launcharoo.history": {
+        "catapult.history": {
           "default": {},
           "scope": "application",
           "description": "Command history - this is a list of previous commandlines in display order for each used target. Feel free to tidy and customize this list. Changes will be applied immediately."
@@ -39,28 +41,28 @@
     },
     "commands": [
       {
-        "command": "launcharoo.pickAndLaunch",
-        "title": "Launcharoo: Pick Target & Launch"
+        "command": "catapult.pickAndLaunch",
+        "title": "catapult: Pick Target & Launch"
       },
       {
-        "command": "launcharoo.launch",
-        "title": "Launcharoo: Launch"
+        "command": "catapult.launch",
+        "title": "catapult: Launch"
       },
       {
-        "command": "launcharoo.debug",
-        "title": "Launcharoo: Debug"
+        "command": "catapult.debug",
+        "title": "catapult: Debug"
       },
       {
-        "command": "launcharoo.again",
-        "title": "Launcharoo: Same again!"
+        "command": "catapult.again",
+        "title": "catapult: Same again!"
       },
       {
-        "command": "launcharoo.clear",
-        "title": "Launcharoo: Clear targets history"
+        "command": "catapult.clear",
+        "title": "catapult: Clear targets history"
       },
       {
-        "command": "launcharoo.settings",
-        "title": "Launcharoo: Settings"
+        "command": "catapult.settings",
+        "title": "catapult: Settings"
       }
     ]
   },

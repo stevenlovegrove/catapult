@@ -13,16 +13,16 @@ let currentArgs : string = "";
 let currentDoDebug : boolean = false;
 
 function saveConfig() : void {
-	vscode.workspace.getConfiguration().update("launcharoo.history", history, vscode.ConfigurationTarget.Global);
+	vscode.workspace.getConfiguration().update("catapult.history", history, vscode.ConfigurationTarget.Global);
 }
 
 function maxHistoryPerTarget() : number {
-	let num = vscode.workspace.getConfiguration().get("launcharoo.maxHistoryPerTarget", {});
+	let num = vscode.workspace.getConfiguration().get("catapult.maxHistoryPerTarget", {});
 	return typeof num === 'number' ? num : 100;
 }
 
 function editArgumentsBeforeLaunch() : boolean {
-	let v = vscode.workspace.getConfiguration().get("launcharoo.editArgumentsBeforeLaunch", {});
+	let v = vscode.workspace.getConfiguration().get("catapult.editArgumentsBeforeLaunch", {});
 	return typeof v === 'boolean' ? v : true;
 }
 
@@ -104,8 +104,8 @@ function targetLaunched(target : unknown) {
 		});
 	});
 
-	if(targetHistory?.length === 0 && otherHistory?.length === 0) {
-		targetArgsSelected({label:""});
+	if( (!targetHistory || targetHistory.length === 0) && (!otherHistory || otherHistory.length === 0) ) {
+		targetArgsSelected({label:empty});
 	}else{
 		let items : vscode.QuickPickItem[] = [];
 		items.push({kind: vscode.QuickPickItemKind.Separator, label:"Start from scratch"});
@@ -129,7 +129,6 @@ function targetLaunched(target : unknown) {
 			title: "Select command line arguments to customize",
 			placeHolder: "Arguments for '" + currentTarget + "'"
 		} ).then(targetArgsSelected);
-
 	}
 }
 
@@ -139,7 +138,7 @@ async function pickAndLaunch() {
 }
 
 function common() {
-	history = vscode.workspace.getConfiguration().get("launcharoo.history", {});
+	history = vscode.workspace.getConfiguration().get("catapult.history", {});
 }
 
 // This method is called when your extension is activated
@@ -149,34 +148,34 @@ export function activate(context: vscode.ExtensionContext) {
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
 	context.subscriptions.push(
-		vscode.commands.registerCommand('launcharoo.pickAndLaunch', () => {
+		vscode.commands.registerCommand('catapult.pickAndLaunch', () => {
 			common();
 			currentDoDebug = false;
 			pickAndLaunch();
 		}),
-		vscode.commands.registerCommand('launcharoo.launch', () => {
+		vscode.commands.registerCommand('catapult.launch', () => {
 			common();
 			currentDoDebug = false;
 			vscode.commands.executeCommand('cmake.launchTargetPath').then(targetLaunched);
 		}),
-		vscode.commands.registerCommand('launcharoo.debug', () => {
+		vscode.commands.registerCommand('catapult.debug', () => {
 			common();
 			currentDoDebug = true;
 			vscode.commands.executeCommand('cmake.launchTargetPath').then(targetLaunched);
 		}),
-		vscode.commands.registerCommand('launcharoo.again', () => {
+		vscode.commands.registerCommand('catapult.again', () => {
 			common();
 			targetArgsCustomized(currentArgs);
 		}),
-		vscode.commands.registerCommand('launcharoo.clear', () => {
+		vscode.commands.registerCommand('catapult.clear', () => {
 			common();
 			currentDoDebug = true;
 			vscode.commands.executeCommand('cmake.launchTargetPath').then(targetClear);
 		}),
-		vscode.commands.registerCommand('launcharoo.settings', () => {
+		vscode.commands.registerCommand('catapult.settings', () => {
 			common();
 			currentDoDebug = true;
-			vscode.commands.executeCommand( 'workbench.action.openSettings', 'launcharoo' );
+			vscode.commands.executeCommand( 'workbench.action.openSettings', 'catapult' );
 		})
 
 

@@ -1,4 +1,4 @@
-# launcharoo README
+# catapult README
 
 blah blah
 
@@ -18,7 +18,7 @@ sdfdsf
 
 This extension contributes the following settings:
 
-* `launcharoo.history`: command and argument history.
+* `catapult.history`: command and argument history.
 
 ## Known Issues
 
